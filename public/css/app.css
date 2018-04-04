@@ -1,6 +1,7 @@
 .divWrap {
   border-bottom: solid #95A5A6 1px;
   padding-bottom: 7px;
+  margin-top: 10px;
 }
 
 .typoTitle {
@@ -8,4 +9,7 @@
 }
 .details {
   margin-top: 10px;
+}
+.commentCount {
+  text-decoration: underline;
 }

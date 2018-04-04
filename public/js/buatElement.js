@@ -70,4 +70,3 @@ export const h1 = (...args) => makeElement(`h1`, ...args);
 export const header = (...args) => makeElement(`header`, ...args);
 export const p = (...args) => makeElement(`p`, ...args);
 export const span = (...args) => makeElement(`span`, ...args);
-

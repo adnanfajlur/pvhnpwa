@@ -2,7 +2,7 @@ import {
   p,
   div,
   span,
-  hokya,
+  a,
 } from './buatElement.js'
 
 
@@ -18,14 +18,23 @@ fetchAsync()
 
 function renderList(data) {
   const content = document.getElementById('content')
+  console.log(data)
   content.appendChild(div(
     data.map(n => (
       div({ className: 'divWrap' },
-        p({ className: 'typoTitle' }, n.title),
-        span(n.domain),
+        a({
+          className: 'typoTitle',
+          target: '_blank',
+          rel: `noopener external`,
+          title: `${n.title}`,
+          href: `${n.url}`,
+        }, n.title),
+        p(n.domain),
         div({ className: 'details'},
           span(`${n.points || 0} ★`),
-          span(` by ${n.user}`)
+          span(` by ${n.user}`),
+          span(` ${n.time_ago}  `),
+          a({ className: 'commentCount' }, `${n.comments_count} comments`),
         )
       )
     ))
