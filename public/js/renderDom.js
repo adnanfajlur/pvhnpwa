@@ -29,4 +29,12 @@ function renderList(data) {
   ))
 }
 
+function renderLoading() {
+  const content = document.getElementById('content')
+  content.appendChild(div({ className: 'divLoading' },
+    p('Loading...')
+  ))
+}
+
 window.renderList = renderList
+window.renderLoading = renderLoading
