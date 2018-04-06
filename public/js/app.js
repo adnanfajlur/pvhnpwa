@@ -4,8 +4,9 @@ const content = document.getElementById('content')
 function changeUrl(param) {
   deleteDom()
   window.history.pushState({}, null, param);
-  const page = window.location.pathname.slice(1);
+  const pages = window.location.pathname.slice(1);
   const search = new URL(window.location.href).searchParams.get('page');
+  page = pages === 'news' ? 'newest' : pages;
   loadingDom(true);
   fetchAsync(page, search)
     .then(data => window.renderList(data))
@@ -33,7 +34,7 @@ function deleteDom() {
 
 // get data function
 async function fetchAsync(page, search) {
-  let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'top' : page}.json?page=${search}`);
+  let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'news' : page}.json?page=${search}`);
   let data = await response.json();
   loadingDom(false)
   return data;
