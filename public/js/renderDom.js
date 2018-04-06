@@ -29,10 +29,10 @@ function renderList(data) {
   ))
 }
 
-function renderLoading() {
+function renderLoading(param) {
   const content = document.getElementById('content')
   content.appendChild(div({ className: 'divLoading' },
-    p('Loading...')
+    p(param)
   ))
 }
 
