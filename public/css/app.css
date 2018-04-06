@@ -13,3 +13,8 @@
 .commentCount {
   text-decoration: underline;
 }
+.linkMenu {
+  margin: 0 20px;
+  color: #FFF;
+  cursor: pointer;
+}

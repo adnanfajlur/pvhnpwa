@@ -43,10 +43,16 @@
     <div class="wrapAppbar">
       <div class="appbar">
         <img src="./img/favicon-32x32.png">
+        <p class="linkMenu" onclick="changeUrl('/?page=1')">Top</p>
+        <p class="linkMenu" onclick="changeUrl('/news?page=1')">News</p>
+        <p class="linkMenu" onclick="changeUrl('/show?page=1')">Show</p>
+        <p class="linkMenu" onclick="changeUrl('/ask?page=1')">Ask</p>
+        <p class="linkMenu" onclick="changeUrl('/jobs?page=1')">Jobs</p>
       </div>
     </div>
     <div id="content">
     </div>
-    <script src="/js/app.js" type="module"></script>
+    <script src="/js/renderList.js" type="module"></script>
+    <script src="/js/app.js" type="text/javascript"></script>
   </body>
 </html>
