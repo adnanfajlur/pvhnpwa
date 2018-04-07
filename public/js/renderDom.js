@@ -13,6 +13,7 @@ const halaman = () => window.location.pathname.slice(1)
 const page = () => Number(new URL(window.location.href).searchParams.get('page'))
 
 function renderList(data) {
+  deleteDom(content)
   data.length > 0 ? elContent.appendChild(div(
     data.map(n => (
       div({ className: 'divWrap' },
@@ -73,13 +74,9 @@ function renderPagination() {
 
 function renderNotif(param) {
   deleteDom(content)
-  if (param !== 'undefined') {
-    elContent.appendChild(div({ id: 'divNotif' },
-      p(param)
-    ))
-  } else {
-    deleteDom(getEl('divNotif'))
-  }
+  elContent.appendChild(div({ id: 'divNotif' },
+    p(param)
+  ))
 }
 
 function deleteDom(param) {
@@ -90,10 +87,10 @@ function deleteDom(param) {
 
 function fetchData() {
   deleteDom(content)
-  const pages = window.location.pathname.slice(1);
+  const pages = halaman();
   const search = new URL(window.location.href).searchParams.get('page');
   const page = pages === 'news' ? 'newest' : pages;
-  renderNotif(true);
+  renderNotif('Loading...');
   fetchAsync(page, search)
     .then(data => renderList(data))
     .catch(err => renderNotif(`ERROR!!! ${err.message}`))
@@ -101,14 +98,17 @@ function fetchData() {
 
 function changeUrl(param) {
   window.history.pushState({}, null, param);
+  const active = [].slice.call(document.getElementsByClassName('active'))
+  active.map(n => n.className = '')
   rePage();
   fetchData();
+  getEl(`link${param.slice(1, param.indexOf('?'))}`).className = 'active'
 }
 
 async function fetchAsync(page, search) {
   let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'news' : page}.json?page=${search}`);
   let data = await response.json();
-  renderNotif()
+  deleteDom(content)
   return data;
 }
 
@@ -116,4 +116,4 @@ fetchData()
 renderPagination()
 
 window.changeUrl = changeUrl
-window.deleteDom = deleteDom
+window.getEl = getEl

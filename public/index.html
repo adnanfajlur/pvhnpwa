@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>PVHNPWA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="/css/app.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <style>
       body {
@@ -32,6 +31,18 @@
         margin: 0 auto;
         padding: 0px 21px;
         height: 48px;
+      }
+      .linkMenu {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 20px;
+      }
+      .linkMenu > p {
+        border-radius: 5px;
+        color: #FFF;
+        cursor: pointer;
+        margin: 0 20px;
+        padding: 7px;
       }
       .pagination {
         height: 30px;
@@ -61,17 +72,44 @@
         cursor: no-drop;
         color: #666;
       }
+      .divWrap {
+        border-bottom: solid #95A5A6 1px;
+        padding-bottom: 7px;
+        margin-top: 10px;
+      }
+      .typoTitle {
+        font-weight: bold;
+      }
+      .details {
+        margin-top: 10px;
+      }
+      .commentCount {
+        text-decoration: underline;
+      }
+      .active {
+        background: rgba(0,0,0, 0.3);
+      }
+      @media only screen and (max-width: 600px) {
+        .linkMenu {
+          width: 75vw;
+        }
+        .linkMenu > p {
+          margin: 0;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="wrapAppbar">
       <div class="appbar">
         <img src="./img/favicon-32x32.png">
-        <p class="linkMenu" onclick="changeUrl('/?page=1')">Top</p>
-        <p class="linkMenu" onclick="changeUrl('/news?page=1')">News</p>
-        <p class="linkMenu" onclick="changeUrl('/show?page=1')">Show</p>
-        <p class="linkMenu" onclick="changeUrl('/ask?page=1')">Ask</p>
-        <p class="linkMenu" onclick="changeUrl('/jobs?page=1')">Jobs</p>
+        <div class="linkMenu">
+          <p id="link" onclick="changeUrl('/?page=1')">Top</p>
+          <p id="linknews" onclick="changeUrl('/news?page=1')">News</p>
+          <p id="linkshow" onclick="changeUrl('/show?page=1')">Show</p>
+          <p id="linkask" onclick="changeUrl('/ask?page=1')">Ask</p>
+          <p id="linkjobs" onclick="changeUrl('/jobs?page=1')">Jobs</p>
+        </div>
       </div>
       <div id="pagination" class="pagination">
       </div>
