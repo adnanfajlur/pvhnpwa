@@ -5,9 +5,15 @@ import {
   a,
 } from './buatElement.js'
 
+const getEl = (param) => document.getElementById(param)
+const elContent = getEl('content')
+const elPagination = getEl('pagination')
+const elLeftArrow = getEl('leftArrow')
+const halaman = () => window.location.pathname.slice(1)
+const page = () => Number(new URL(window.location.href).searchParams.get('page'))
+
 function renderList(data) {
-  const content = document.getElementById('content')
-  content.appendChild(div(
+  data.length > 0 ? elContent.appendChild(div(
     data.map(n => (
       div({ className: 'divWrap' },
         a({
@@ -27,14 +33,87 @@ function renderList(data) {
       )
     ))
   ))
+  : renderNotif('Data Not Found')
 }
 
-function renderLoading(param) {
-  const content = document.getElementById('content')
-  content.appendChild(div({ className: 'divLoading' },
-    p(param)
+function rePage() {
+  document.getElementsByClassName('typoPagination')[0].innerHTML = `${page()}`
+  const editArrow = (param) => getEl('leftArrow').className = param
+  if (page() >= 2) {
+    editArrow('paginationArrow')
+  } else {
+    editArrow('typoInActive')
+  }
+}
+
+function renderPagination() {
+  elPagination.appendChild(div({ className: 'paginationChild' },
+    span({
+      id: 'leftArrow',
+      className: page() >= 2 ? 'paginationArrow' : 'typoInActive',
+      onclick: () => {
+        if (page() >= 2) {
+          window.history.pushState({}, null, `/${halaman()}?page=${page() - 1}`)
+          rePage()
+          fetchData()
+        }
+      },
+    }, `< Prev`),
+    span({ className: 'typoPagination'}, `${page()}`),
+    span({
+      className: 'paginationArrow',
+      onclick: () => {
+        window.history.pushState({}, null, `/${halaman()}?page=${page() + 1}`)
+        rePage()
+        fetchData()
+      },
+    }, `Next >`)
   ))
 }
 
-window.renderList = renderList
-window.renderLoading = renderLoading
+function renderNotif(param) {
+  deleteDom(content)
+  if (param !== 'undefined') {
+    elContent.appendChild(div({ id: 'divNotif' },
+      p(param)
+    ))
+  } else {
+    deleteDom(getEl('divNotif'))
+  }
+}
+
+function deleteDom(param) {
+  while (param.firstChild) {
+    param.removeChild(param.firstChild)
+  }
+}
+
+function fetchData() {
+  deleteDom(content)
+  const pages = window.location.pathname.slice(1);
+  const search = new URL(window.location.href).searchParams.get('page');
+  const page = pages === 'news' ? 'newest' : pages;
+  renderNotif(true);
+  fetchAsync(page, search)
+    .then(data => renderList(data))
+    .catch(err => renderNotif(`ERROR!!! ${err.message}`))
+}
+
+function changeUrl(param) {
+  window.history.pushState({}, null, param);
+  rePage();
+  fetchData();
+}
+
+async function fetchAsync(page, search) {
+  let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'news' : page}.json?page=${search}`);
+  let data = await response.json();
+  renderNotif()
+  return data;
+}
+
+fetchData()
+renderPagination()
+
+window.changeUrl = changeUrl
+window.deleteDom = deleteDom

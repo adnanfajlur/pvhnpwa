@@ -7,40 +7,60 @@
     <link rel="stylesheet" href="/css/app.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-    }
-    a {
-      cursor: pointer;
-      text-decoration: none;
-      color: #000;
-    }
-    .wrapAppbar {
-      background: #F9690E;
-      min-height: 45px;
-      position: fixed;
-      width: 100vw;
-      display: flex;
-    }
-    .appbar {
-      display: flex;
-      align-items: center;
-      width: 800px;
-      margin: 0 auto;
-      padding: 0px 21px;
-    }
-    #content {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #ECECEC;
-      padding: 50px 20px 20px;
-      min-height: 100vh;
-    }
-    .divLoading {
-      text-align: center;
-      margin-top: 100px;
-    }
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+      a {
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+      }
+      .wrapAppbar {
+        background: #F9690E;
+        min-height: 45px;
+        position: fixed;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        top: 0;
+      }
+      .appbar {
+        display: flex;
+        align-items: center;
+        width: 800px;
+        margin: 0 auto;
+        padding: 0px 21px;
+        height: 48px;
+      }
+      .pagination {
+        height: 30px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #content {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #ECECEC;
+        padding: 90px 20px 20px;
+        min-height: 100vh;
+      }
+      #divNotif {
+        text-align: center;
+        margin-top: 100px;
+      }
+      .typoPagination {
+        margin: auto 20px;
+      }
+      .paginationArrow {
+        cursor: pointer;
+      }
+      .typoInActive {
+        cursor: no-drop;
+        color: #666;
+      }
     </style>
   </head>
   <body>
@@ -52,6 +72,8 @@
         <p class="linkMenu" onclick="changeUrl('/show?page=1')">Show</p>
         <p class="linkMenu" onclick="changeUrl('/ask?page=1')">Ask</p>
         <p class="linkMenu" onclick="changeUrl('/jobs?page=1')">Jobs</p>
+      </div>
+      <div id="pagination" class="pagination">
       </div>
     </div>
     <div id="content">
