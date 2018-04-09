@@ -106,7 +106,11 @@ function changeUrl(param) {
 }
 
 async function fetchAsync(page, search) {
-  let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'news' : page}.json?page=${search}`);
+  let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'news' : page}.json?page=${search}`, {
+    header: {
+      'Access-Control-Allow-Origin': '*'
+    }
+  });
   let data = await response.json();
   deleteDom(content)
   return data;
@@ -114,6 +118,6 @@ async function fetchAsync(page, search) {
 
 fetchData()
 renderPagination()
+getEl(`link${halaman()}`).className = 'active'
 
 window.changeUrl = changeUrl
-window.getEl = getEl
