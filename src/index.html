@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>PVHNPWA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel='shortcut icon' type='image/x-icon' href='./img/icon/favicon.ico' />
+    <meta name="description" content="HNPWA with pure js, es7, and workbox"/>
+    <link rel="manifest" href="./other/manifest.json" />
+    <meta name="theme-color" content="#12498C" />
     <style>
       body {
         margin: 0;
@@ -16,7 +19,7 @@
         color: #000;
       }
       .wrapAppbar {
-        background: #F9690E;
+        background: #1E824C;
         min-height: 45px;
         position: fixed;
         width: 100vw;
@@ -100,22 +103,24 @@
     </style>
   </head>
   <body>
-    <div class="wrapAppbar">
-      <div class="appbar">
-        <img src="./img/icon/coffe-32.png">
-        <div class="linkMenu">
-          <p id="link" onclick="changeUrl('/?page=1')">Top</p>
-          <p id="linknews" onclick="changeUrl('/news?page=1')">News</p>
-          <p id="linkshow" onclick="changeUrl('/show?page=1')">Show</p>
-          <p id="linkask" onclick="changeUrl('/ask?page=1')">Ask</p>
-          <p id="linkjobs" onclick="changeUrl('/jobs?page=1')">Jobs</p>
+    <main>
+      <div class="wrapAppbar">
+        <div class="appbar">
+          <img src="./img/icon/coffe-32.png" alt="coffe">
+          <div class="linkMenu">
+            <p id="link" onclick="changeUrl('/?page=1')">Top</p>
+            <p id="linknews" onclick="changeUrl('/news?page=1')">News</p>
+            <p id="linkshow" onclick="changeUrl('/show?page=1')">Show</p>
+            <p id="linkask" onclick="changeUrl('/ask?page=1')">Ask</p>
+            <p id="linkjobs" onclick="changeUrl('/jobs?page=1')">Jobs</p>
+          </div>
+        </div>
+        <div id="pagination" class="pagination">
         </div>
       </div>
-      <div id="pagination" class="pagination">
+      <div id="content">
       </div>
-    </div>
-    <div id="content">
-    </div>
+    </main>
     <script src="/js/renderDom.js" type="module"></script>
     <script src="/js/app.js" type="text/javascript"></script>
   </body>

@@ -1,8 +1,12 @@
 module.exports = {
-  "globDirectory": "src/",
+  globDirectory: './src',
   "globPatterns": [
-    "**/*.{png,xml,ico,svg,webmanifest,html,js}"
+    "**/*.{png,ico,html,js,json}"
   ],
-  "swDest": "src/sw.js",
-  "swSrc": "src-sw.js"
+  globIgnores: ['**/sw.js'],
+  swDest: './src/sw.js',
+  navigateFallback: '/',
+  templatedUrls: {
+    '/': ['index.html']
+  },
 };
