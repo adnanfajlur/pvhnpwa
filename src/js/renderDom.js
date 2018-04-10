@@ -106,6 +106,7 @@ function changeUrl(param) {
 }
 
 async function fetchAsync(page, search) {
+  renderOffline()
   let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'news' : page}.json?page=${search}`, {
     header: {
       'Access-Control-Allow-Origin': '*'
@@ -114,6 +115,27 @@ async function fetchAsync(page, search) {
   let data = await response.json();
   deleteDom(content)
   return data;
+}
+
+function renderOffline() {
+  if (!window.navigator.onLine) {
+    getEl('main').appendChild(div({
+      style: {
+        position: 'fixed',
+        bottom: '0',
+        width: '100vw',
+        textAlign: 'center',
+        padding: '5px 0',
+        color: '#fff',
+        background: '#c0392b'
+      },
+      id: 'divOffline'
+    },
+      span(`No Connections Are Available`)
+    ))
+  } else if (getEl('divOffline') !== null) {
+    getEl('main').removeChild(getEl('divOffline'))
+  }
 }
 
 fetchData()
