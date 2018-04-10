@@ -13,7 +13,7 @@ const halaman = () => window.location.pathname.slice(1)
 const page = () => Number(new URL(window.location.href).searchParams.get('page'))
 
 function renderList(data) {
-  deleteDom(content)
+  deleteDom(elContent)
   data.length > 0 ? elContent.appendChild(div(
     data.map(n => (
       div({ className: 'divWrap' },
@@ -29,12 +29,66 @@ function renderList(data) {
           span(`${n.points || 0} ★`),
           span(` by ${n.user}`),
           span(` ${n.time_ago}  `),
-          a({ className: 'commentCount' }, `${n.comments_count} comments`),
+          a({
+            className: 'commentCount',
+            onclick: () => changeUrl(`/item?id=${n.id}`)
+          }, `${n.comments_count} comments`),
         )
       )
     ))
   ))
   : renderNotif('Data Not Found')
+}
+
+function renderComment(data) {
+  deleteDom(elContent)
+  const parser = (param) => {
+    const DOM = new DOMParser().parseFromString(param, 'text/html')
+    return DOM.body
+  }
+  const onComment = (param) => {
+    const render = div(
+      span({ style: {fontWeight: 'bold', marginRight: '10px'} }, `${param.user}`),
+      span(`${param.time_ago}`),
+      div({ id: 'comments-content' }, parser(param.content)),
+      onComments(param.comments)
+    )
+    return render
+  }
+
+  const onComments = (param) => {
+    const render = div(
+      param.map(n => div(
+        { id: 'comments-list' },
+        onComment(n)
+      ))
+    )
+    return render
+  }
+
+  elContent.appendChild(div(
+    a({
+      className: 'typoTitle',
+      target: '_blank',
+      rel: `noopener external`,
+      title: `${data.title}`,
+      href: `${data.url}`,
+    }, data.title),
+    div({ className: 'details'},
+      span({ style: {fontWeight: 'bold'} },` by ${data.user}`),
+      span(` ${data.time_ago}`),
+      span({ style: {marginLeft: '15px'} },` ${data.points || 0} ★`),
+    ),
+    div({style: {
+      margin: '20px 0',
+      padding: '16px',
+      background: '#f9f9f9',
+    }}, `No Content`),
+    div({ id: `comment`},
+      div({ id: `comments-count`}, `${data.comments_count || 0} Comments`),
+      div().innerHTML = onComments(data.comments)
+    )
+  ))
 }
 
 function rePage() {
@@ -73,7 +127,7 @@ function renderPagination() {
 }
 
 function renderNotif(param) {
-  deleteDom(content)
+  deleteDom(elContent)
   elContent.appendChild(div({ id: 'divNotif' },
     p(param)
   ))
@@ -86,13 +140,13 @@ function deleteDom(param) {
 }
 
 function fetchData() {
-  deleteDom(content)
+  deleteDom(elContent)
   const pages = halaman();
-  const search = new URL(window.location.href).searchParams.get('page');
+  const search = new URL(window.location.href).searchParams.get(`${pages === 'item' ? 'id' : 'page'}`);
   const page = pages === 'news' ? 'newest' : pages;
   renderNotif('Loading...');
   fetchAsync(page, search)
-    .then(data => renderList(data))
+    .then(data => page === 'item' ? renderComment(data) : renderList(data))
     .catch(err => renderNotif(`ERROR!!! ${err.message}`))
 }
 
@@ -102,18 +156,30 @@ function changeUrl(param) {
   active.map(n => n.className = '')
   rePage();
   fetchData();
-  getEl(`link${param.slice(1, param.indexOf('?'))}`).className = 'active'
+  if (param.slice(1, param.indexOf('?')) !== 'item') {
+    getEl(`link${param.slice(1, param.indexOf('?'))}`).className = 'active';
+  }
 }
 
 async function fetchAsync(page, search) {
   renderOffline()
-  let response = await fetch(`https://hnpwa.com/api/v0/${page === '' ? 'news' : page}.json?page=${search}`, {
+  const base = `https://hnpwa.com/api/v0`;
+  let url = ``;
+  if (page === 'item') {
+    elPagination.style.display = 'none'
+    url = `${base}/item/${search}.json`
+  } else {
+    url = `${base}/${page === '' ? 'news' : page}.json?page=${search}`
+    elPagination.style.display = 'flex'
+    getEl(`link${halaman()}`).className = 'active'
+  }
+  let response = await fetch(url, {
     header: {
       'Access-Control-Allow-Origin': '*'
     }
   });
   let data = await response.json();
-  deleteDom(content)
+  deleteDom(elContent)
   return data;
 }
 
@@ -140,6 +206,7 @@ function renderOffline() {
 
 fetchData()
 renderPagination()
-getEl(`link${halaman()}`).className = 'active'
 
 window.changeUrl = changeUrl
+window.deleteDom = deleteDom
+window.getEl = getEl

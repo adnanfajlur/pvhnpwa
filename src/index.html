@@ -5,8 +5,9 @@
     <title>PVHNPWA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel='shortcut icon' type='image/x-icon' href='./img/icon/favicon.ico' />
-    <meta name="description" content="HNPWA with pure js, es7, and workbox"/>
+    <meta name="description" content="HNPWA with pure js, es6, and workbox"/>
     <link rel="manifest" href="./other/manifest.json" />
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
     <meta name="theme-color" content="#12498C" />
     <style>
       body {
@@ -18,7 +19,7 @@
         text-decoration: none;
         color: #000;
       }
-      .wrapAppbar {
+      #wrapAppbar {
         background: #1E824C;
         min-height: 45px;
         position: fixed;
@@ -88,6 +89,7 @@
       }
       .commentCount {
         text-decoration: underline;
+        cursor: pointer;
       }
       .active {
         background: rgba(0,0,0, 0.3);
@@ -104,7 +106,7 @@
   </head>
   <body>
     <main id="main">
-      <div class="wrapAppbar">
+      <div id="wrapAppbar">
         <div class="appbar">
           <img src="./img/icon/coffe-32.png" alt="coffe">
           <div class="linkMenu">
