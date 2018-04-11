@@ -8,7 +8,7 @@
     "workbox-build": "3.0.1"
   },
   "scripts": {
-    "dev": "superstatic src",
+    "start": "superstatic",
     "gen-sw": "node workbox-config.js",
     "build": "yarn gen-sw",
     "deploy": "yarn build && firebase deploy",
