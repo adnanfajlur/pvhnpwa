@@ -9,9 +9,8 @@
   },
   "scripts": {
     "dev": "superstatic src",
-    "gen-babel": "babel src --out-dir public --copy-files",
     "gen-sw": "node workbox-config.js",
-    "build": "yarn gen-babel && yarn gen-sw",
+    "build": "yarn gen-sw",
     "deploy": "yarn build && firebase deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,9 +29,5 @@
   "bugs": {
     "url": "https://github.com/adnanfajlur/pvhnpwa/issues"
   },
-  "homepage": "https://github.com/adnanfajlur/pvhnpwa#readme",
-  "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
-  }
+  "homepage": "https://github.com/adnanfajlur/pvhnpwa#readme"
 }

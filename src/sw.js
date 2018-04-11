@@ -25,15 +25,15 @@ self.__precacheManifest = [
   },
   {
     "url": "js/app.js",
-    "revision": "b8d3c0f4a67bec42f1c8128403f8f78e"
+    "revision": "603db79e42b22b80bdf7c865e9048366"
   },
   {
     "url": "js/buatElement.js",
-    "revision": "9b1978e5014c142c6432d7b6e32433a9"
+    "revision": "4f9173a330ced77becfeefa082efc31b"
   },
   {
     "url": "js/renderDom.js",
-    "revision": "1e089492eb74bdedc78e7569d724db00"
+    "revision": "e71d373b20b928cb8f6ac040f688ccca"
   },
   {
     "url": "/",
