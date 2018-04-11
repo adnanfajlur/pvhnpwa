@@ -3,17 +3,15 @@
   "version": "1.0.0",
   "description": "Pure js - HNPWA",
   "main": "index.js",
-  "dependencies": {
-  },
   "devDependencies": {
-    "workbox-cli": "^3.0.1",
-    "workbox-build": "3.0.1",
-    "superstatic": "5.0.1"
+    "superstatic": "5.0.1",
+    "workbox-build": "3.0.1"
   },
   "scripts": {
-    "dev": "superstatic",
-    "build": "workbox generateSW ./workbox-config.js",
-    "serve": "yarn build && superstatic",
+    "dev": "superstatic src",
+    "gen-babel": "babel src -d public",
+    "gen-sw": "node workbox-config.js",
+    "build": "yarn gen-babel && yarn gen-sw",
     "deploy": "yarn build && firebase deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,5 +30,9 @@
   "bugs": {
     "url": "https://github.com/adnanfajlur/pvhnpwa/issues"
   },
-  "homepage": "https://github.com/adnanfajlur/pvhnpwa#readme"
+  "homepage": "https://github.com/adnanfajlur/pvhnpwa#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
 }

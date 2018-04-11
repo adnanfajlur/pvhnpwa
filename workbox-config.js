@@ -1,12 +1,15 @@
-module.exports = {
+const workboxBuild = require('workbox-build');
+
+workboxBuild.generateSW({
   globDirectory: './src',
-  "globPatterns": [
-    "**/*.{png,ico,html,js,json}"
-  ],
+  globPatterns: ['**\/*.{html,js,css}'],
   globIgnores: ['**/sw.js'],
   swDest: './src/sw.js',
   navigateFallback: '/',
   templatedUrls: {
     '/': ['index.html']
-  },
-};
+  }
+})
+.then(() => {
+  console.log('Service worker generated.');
+});
