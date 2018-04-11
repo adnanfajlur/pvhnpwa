@@ -22,10 +22,10 @@
     "url": "git+https://github.com/adnanfajlur/pvhnpwa.git"
   },
   "keywords": [
-    "pure",
-    "js",
+    "pure js",
     "pwa",
-    "hnpwa"
+    "hnpwa",
+    "workbox"
   ],
   "author": "Adnan Fajlur Rohman",
   "license": "MIT",

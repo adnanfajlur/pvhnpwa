@@ -33,7 +33,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "f2d26fedb421a982d2846ede4a2e31e6"
+    "revision": "bb1d94239bc32bfb4a14d8d424416010"
   },
   {
     "url": "js/app.js",
@@ -45,7 +45,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/renderDom.js",
-    "revision": "2bbc243ed99d4f232a65b2d84220a3f1"
+    "revision": "292f35259000df3f40cf2cb387469658"
   },
   {
     "url": "other/manifest.json",
@@ -53,7 +53,7 @@ self.__precacheManifest = [
   },
   {
     "url": "/",
-    "revision": "93f569f3536b3c756772727fc77de6ce"
+    "revision": "2c6c10f4bbf40cfaf52c4faa3f8cd9ac"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
