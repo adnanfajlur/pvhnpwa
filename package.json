@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "superstatic src",
-    "gen-babel": "babel src -d public",
+    "gen-babel": "babel src --out-dir public --copy-files",
     "gen-sw": "node workbox-config.js",
     "build": "yarn gen-babel && yarn gen-sw",
     "deploy": "yarn build && firebase deploy",
