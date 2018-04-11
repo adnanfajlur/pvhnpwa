@@ -1,10 +1,10 @@
 const workboxBuild = require('workbox-build');
 
 workboxBuild.generateSW({
-  globDirectory: './src',
+  globDirectory: './public',
   globPatterns: ['**\/*.{html,js,css}'],
   globIgnores: ['**/sw.js'],
-  swDest: './src/sw.js',
+  swDest: './public/sw.js',
   navigateFallback: '/',
   templatedUrls: {
     '/': ['index.html']

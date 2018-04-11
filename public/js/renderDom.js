@@ -209,5 +209,3 @@ fetchData();
 renderPagination();
 
 window.changeUrl = changeUrl;
-window.deleteDom = deleteDom;
-window.getEl = getEl;
