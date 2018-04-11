@@ -11,7 +11,8 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.1/workbox-sw.js");
+importScripts("workbox-v3.0.1/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "workbox-v3.0.1"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
